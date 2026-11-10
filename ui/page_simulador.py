@@ -17,9 +17,8 @@ def _load(values: dict):
 
 
 def render():
-    st.title("Simulador manual")
+    theme.header("Simulador manual", "Escolha um cenário ou introduza uma leitura e veja que regras dispara. As variáveis derivadas são calculadas automaticamente.")
     ss = st.session_state
-    st.caption("Introduza uma leitura e veja que regras dispara. As variáveis derivadas são calculadas automaticamente e não são editáveis.")
     if "sim_Type" not in ss:
         _load(SCENARIOS["Normal"])
     cols = st.columns(5)
@@ -33,8 +32,8 @@ def render():
         st.selectbox("Tipo de produto (qualidade)", ["L", "M", "H"], key="sim_Type")
         for key, label in FIELDS:
             lo, hi, olo, ohi, unit = INPUT_LIMITS[key]
-            st.number_input(f"{label} — permitido [{lo:g}; {hi:g}] {unit}; observado no AI4I [{olo:g}; {ohi:g}]",
-                            min_value=float(lo), max_value=float(hi), step=0.1, key=f"sim_{key}")
+            st.number_input(label, min_value=float(lo), max_value=float(hi), step=0.1, key=f"sim_{key}",
+                            help=f"Permitido: {lo:g} a {hi:g} {unit}. Observado no AI4I: {olo:g} a {ohi:g} {unit}.")
     vals = dict(Type=ss.sim_Type, **{k: ss[f"sim_{k}"] for k, _ in FIELDS})
     errors, warnings = validate_inputs(**vals)
     with right:
@@ -50,11 +49,11 @@ def render():
         theme.state_box(r["estado"])
         d = r["derivadas"]
         c = st.columns(3)
-        with c[0]: theme.card("dT", f"{pt(d['dT'])} K", "T_proc − T_ar")
-        with c[1]: theme.card("Potência", f"{pt(d['Potencia'])} W", "Torque·Rot·2π/60")
-        with c[2]: theme.card("Sobrecarga", f"{pt(d['Sobrecarga'])} min·Nm", "Desgaste·Torque")
+        with c[0]: theme.card("dT (K)", pt(d['dT']), "T_proc − T_ar")
+        with c[1]: theme.card("Potência (W)", pt(d['Potencia']), "Torque·Rot·2π/60")
+        with c[2]: theme.card("Sobrecarga (min·Nm)", pt(d['Sobrecarga']), "Desgaste·Torque")
         st.write("**Explicação:** " + r["explicacao"])
-        st.dataframe(pd.DataFrame(r["detalhe"]), width="stretch", hide_index=True)
+        st.table(pd.DataFrame(r["detalhe"]).set_index("Regra"))
         if ss.trained is not None or ss.hybrids:
             st.markdown("**Com o ML treinado**")
             row = pd.DataFrame([vals])

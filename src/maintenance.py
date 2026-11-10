@@ -29,10 +29,10 @@ def flow_dot(highlight: list[str] | None = None) -> str:
     """Graphviz DOT do fluxo: Máquina → Funciona? → (Não) Porquê? → ramos → Peça → Responsável → Arranja → Confirmação."""
     hl = set(highlight or [])
     def node(name):
-        color = ' color="#ef4444" fontcolor="#ffffff" fillcolor="#7f1d1d" style="filled,bold"' if name in hl else ' fillcolor="#1f2937"'
+        color = ' color="#dc2626" fontcolor="#991b1b" fillcolor="#fee2e2" style="rounded,filled,bold"' if name in hl else ' fillcolor="#eff6ff"'
         return f'"{name}" [label="{name}"{color}];'
-    lines = ['digraph G { rankdir=LR; bgcolor="transparent"; node [shape=box, style="rounded,filled", fillcolor="#1f2937", '
-             'color="#6b7280", fontcolor="#e5e7eb", fontname="Helvetica"]; edge [color="#9ca3af", fontcolor="#9ca3af", fontname="Helvetica"];',
+    lines = ['digraph G { rankdir=LR; bgcolor="transparent"; node [shape=box, style="rounded,filled", fillcolor="#eff6ff", '
+             'color="#93c5fd", fontcolor="#0f172a", fontname="Helvetica"]; edge [color="#94a3b8", fontcolor="#64748b", fontname="Helvetica"];',
              '"Máquina" -> "Funciona?";', '"Funciona?" [shape=diamond];',
              '"Funciona?" -> "Confirmação" [label="Sim"];', '"Funciona?" -> "Porque motivo?" [label="Não"];', '"Porque motivo?" [shape=diamond];']
     for b in FLOW_BRANCH.values():

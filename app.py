@@ -16,8 +16,8 @@ def main():
     state.init()
     theme.inject()
     with st.sidebar:
-        st.markdown("### INDUSTRIAL INTELLIGENCE")
-        st.caption("Smart Predictive Maintenance · Tema 7")
+        st.markdown('<div class="brand">INDUSTRIAL INTELLIGENCE</div>', unsafe_allow_html=True)
+        st.caption("Manutenção preditiva · Tema 7")
         page = st.radio("Navegação", list(PAGES), label_visibility="collapsed")
         st.divider()
         st.caption(f"Perfil: **{st.session_state.profile_name}**  \nModelo ML: **{state.model_status()}**")

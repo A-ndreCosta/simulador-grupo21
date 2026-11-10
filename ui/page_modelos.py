@@ -71,7 +71,7 @@ def render():
     c = st.columns([1, 1])
     cm = [[r["TN"], r["FP"]], [r["FN"], r["TP"]]]
     fig = px.imshow(cm, text_auto=True, x=["Previsto: normal", "Previsto: alerta/falha"], y=["Real: normal", "Real: falha"],
-                    color_continuous_scale=[[0, "#1d2229"], [1, theme.VIOLET]], title=sel)
+                    color_continuous_scale=[[0, "#f5f3ff"], [1, theme.VIOLET]], title=sel)
     c[0].plotly_chart(fig, width="stretch")
     c[1].markdown(f"TP **{r['TP']}** · FP **{r['FP']}** · FN **{r['FN']}** · TN **{r['TN']}**  \nLeituras: {r['leituras']} · falhas reais: {r['falhas reais']} · detetadas: {r['detetadas']}")
     st.subheader("Recall vs falsos alarmes (híbrido, no teste)")
