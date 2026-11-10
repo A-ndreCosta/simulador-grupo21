@@ -1,8 +1,11 @@
 import streamlit as st
 
+from ui import guia
+
 
 def render():
     st.title("Sobre o projeto")
+    guia.render_guide(expanded=True)
     st.markdown("""
 **INDUSTRIAL INTELLIGENCE — Smart Predictive Maintenance** é uma aplicação de demonstração e análise do projeto académico
 *Tema 7 — Automação Inteligente e Deteção de Falhas*: um sistema híbrido de dois níveis (regras industriais + Machine Learning).

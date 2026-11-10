@@ -5,7 +5,7 @@ import streamlit as st
 from src.detection import ALL_METHODS, method_available
 from src.features import add_derived_features
 from src.rules import STATE_NORMAL
-from ui import state, theme
+from ui import guia, state, theme
 
 
 def _bar(df, x, y, colors, title):
@@ -19,6 +19,7 @@ def _bar(df, x, y, colors, title):
 def render():
     theme.header("Painel geral", "Resumo da análise dos dados carregados com o método e o perfil escolhidos.")
     ss = st.session_state
+    guia.render_guide()
     avail = [m for m in ALL_METHODS if method_available(m, ss.trained, ss.hybrids)]
     if ss.method not in avail:
         ss.method = avail[0]
