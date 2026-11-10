@@ -1,0 +1,22 @@
+{
+  "versao_esquema": 1,
+  "perfil_predefinido": "Trabalho",
+  "perfis": {
+    "Trabalho": {
+      "descricao": "Limites do Tópico 2 do trabalho (notebook). Os limites OSF foram extraídos da análise gráfica do dataset AI4I.",
+      "origem": "Tópico 2 / notebook tudo.ipynb",
+      "pwf": {"potencia_min_w": 3500, "potencia_max_w": 9000},
+      "hdf": {"dT_max_k": 8.6, "rot_max_rpm": 1380},
+      "osf": {"L": 11000, "M": 12337, "H": 13234},
+      "twf": {"desgaste_min": 198, "ativa": false}
+    },
+    "UCI": {
+      "descricao": "Limites alternativos da documentação da UCI para o AI4I 2020 (OSF: L 11000, M 12000, H 13000).",
+      "origem": "Documentação UCI AI4I 2020 (citada no notebook)",
+      "pwf": {"potencia_min_w": 3500, "potencia_max_w": 9000},
+      "hdf": {"dT_max_k": 8.6, "rot_max_rpm": 1380},
+      "osf": {"L": 11000, "M": 12000, "H": 13000},
+      "twf": {"desgaste_min": 198, "ativa": false}
+    }
+  }
+}

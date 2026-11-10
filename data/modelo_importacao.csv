@@ -1,0 +1,4 @@
+﻿UDI,Product ID,Type,Air temperature [K],Process temperature [K],Rotational speed [rpm],Torque [Nm],Tool wear [min],Machine failure,TWF,HDF,PWF,OSF,RNF
+1,EXEMPLO-1,L,300.0,310.0,1500,40.0,100,0,0,0,0,0,0
+2,EXEMPLO-2,M,302.0,310.0,1300,40.0,10,1,0,1,0,0,0
+3,EXEMPLO-3,H,300.0,310.0,2000,60.0,50,1,0,0,1,0,0

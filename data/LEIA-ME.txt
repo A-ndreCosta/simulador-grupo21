@@ -1,0 +1,3 @@
+ai4i2020.csv          - AI4I 2020 Predictive Maintenance Dataset (UCI). Dataset SINTETICO publicado pela UCI; nao vem de uma maquina real. Opcional.
+demo_sintetico.csv    - 240 leituras SIMULADAS (4 series de 60, sementes 1-4) geradas por src/simulation.py. Sem etiquetas. NAO sao dados reais.
+modelo_importacao.csv - modelo de importacao com 3 linhas de EXEMPLO (identificadas).
