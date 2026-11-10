@@ -26,6 +26,34 @@ def init():
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
+    _autoload_ai4i()
+
+
+def _autoload_ai4i():
+    """Na primeira visita carrega o AI4I 2020 (UCI, sintético) para a aplicação abrir com dados. Pode ser substituído em «Importar dados»."""
+    ss = st.session_state
+    if ss.get("autoloaded") or ss.dataset is not None:
+        return
+    ss.autoloaded = True
+    path = DATA_DIR / "ai4i2020.csv"
+    if not path.exists():
+        return
+    from src.file_import import ImportFileError, apply_mapping, detect_mapping, read_table
+    from src.validation import clean_dataframe, validate_dataframe
+    try:
+        df, _ = read_table(path.read_bytes(), path.name)
+        mapping, missing, _ = detect_mapping(list(df.columns))
+        if missing:
+            return
+        rep = validate_dataframe(apply_mapping(df, mapping))
+        if rep.errors or rep.n_invalid:
+            return
+        clean, _ = clean_dataframe(apply_mapping(df, mapping), rep)
+    except ImportFileError:
+        return
+    meta = dict(nome="ai4i2020.csv", origem="UCI AI4I 2020 Predictive Maintenance Dataset — dataset SINTÉTICO publicado pela UCI, não vem de uma máquina real.",
+                sintetico=True, rotulo="AI4I 2020 — dataset sintético (UCI)", linhas=len(clean), etiquetado=rep.has_label)
+    set_dataset(clean.reset_index(drop=True), meta)
 
 
 def profile() -> dict:
